@@ -10,7 +10,6 @@ class MyApp extends StatelessWidget{
         primarySwatch: Colors.deepOrange
       ),
     home: new MyHomePage());
-
   }
 
 }
