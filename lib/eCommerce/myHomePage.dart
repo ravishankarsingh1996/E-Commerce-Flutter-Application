@@ -12,20 +12,25 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   BuildContext context;
-  String acctName = "Ravi";
-  String acctEmail = "ravisingh@brainmobi.com";
+  String acctName = "Ravi Shankar Singh";
+  String acctEmail = "ravishankarsingh1996@gmail.com";
   String acctPic =
       "https://avatars3.githubusercontent.com/u/20386271?s=460&v=4";
+  int noOfFav= 0;
 
   @override
   Widget build(BuildContext context) {
     this.context = context;
 
     void setFavourite(int index) {
-      if (storeItems[index].favourite == false)
+      if (storeItems[index].favourite == false){
         storeItems[index].favourite = true;
-      else
+        noOfFav = noOfFav +1;
+      }
+      else{
         storeItems[index].favourite = false;
+        noOfFav = noOfFav -1;
+      }
       setState(() {});
     }
 
@@ -249,10 +254,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                 Container(
                                   padding: EdgeInsets.all(5.0),
                                   alignment: Alignment(1.0, 0.0),
-                                  child:new InkWell(
+                                  child: new InkWell(
                                     child: new CircleAvatar(
                                       backgroundColor: Colors.black26,
-                                      child:  new IconButton(
+                                      child: new IconButton(
                                           icon: new Icon(
                                             Icons.add_shopping_cart,
                                             color: Colors.deepOrange,
@@ -282,16 +287,33 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         centerTitle: true,
         actions: <Widget>[
-          new IconButton(
-              icon: new Icon(
-                Icons.favorite,
-                color: Colors.white,
-              ),
-              onPressed: () {
+          new Stack(
+            alignment: Alignment.topLeft,
+            children: <Widget>[
+              new IconButton(
+                  icon: new Icon(
+                    Icons.favorite,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
 //                showSnackBar("Opne Favourite", scaffoldKey);
-                Navigator.of(context).push(new MaterialPageRoute(
-                    builder: (context) => new FavouriteItems(storeItems)));
-              }),
+                    Navigator.of(context).push(new MaterialPageRoute(
+                        builder: (context) => FavouriteItems(storeItems: storeItems, onUnFavouritePressed: (bool state){
+                          noOfFav = noOfFav -1;
+                          setState(() {
+                          });
+                        }, )));
+                  }),
+              new CircleAvatar(
+                radius: 8.0,
+                backgroundColor: Colors.teal,
+                child: new Text(
+                  noOfFav.toString(),
+                  style: new TextStyle(color: Colors.white, fontSize: 8.0),
+                ),
+              )
+            ],
+          ),
           new Stack(
             alignment: Alignment.topLeft,
             children: <Widget>[
@@ -305,10 +327,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   }),
               new CircleAvatar(
                 radius: 8.0,
-                backgroundColor: Colors.lightGreenAccent,
+                backgroundColor: Colors.teal,
                 child: new Text(
                   "0",
-                  style: new TextStyle(color: Colors.white, fontSize: 12.0),
+                  style: new TextStyle(color: Colors.white, fontSize: 8.0),
                 ),
               )
             ],

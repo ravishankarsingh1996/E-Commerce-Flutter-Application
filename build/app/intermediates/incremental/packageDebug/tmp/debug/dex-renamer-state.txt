@@ -1,4 +1,4 @@
-#Fri Dec 14 16:51:26 IST 2018
+#Fri Dec 14 17:41:48 IST 2018
 base.0=/home/hp/Documents/ravi/E-Commerce-Flutter-Application-master/build/app/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex

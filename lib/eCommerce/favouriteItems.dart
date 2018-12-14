@@ -6,9 +6,9 @@ import 'data/Store.dart';
 class FavouriteItems extends StatefulWidget {
   List<Store> storeItems, favouriteItems;
   int itemCount = 0;
+  Function(bool state) onUnFavouritePressed;
 
-  FavouriteItems(List<Store> storeItems) {
-    this.storeItems = storeItems;
+  FavouriteItems({this.storeItems, this.onUnFavouritePressed}){
     favouriteItems = new List();
     for (int i = 0; i < storeItems.length; i++) {
       if (storeItems[i].favourite) {
@@ -19,26 +19,19 @@ class FavouriteItems extends StatefulWidget {
   }
 
   @override
-  _FavouriteItemState createState() =>
-      _FavouriteItemState(favouriteItems, itemCount);
+  _FavouriteItemState createState() => _FavouriteItemState();
 }
 
 class _FavouriteItemState extends State<FavouriteItems> {
-  List<Store> favouriteItems;
-  int itemCount;
-
-  _FavouriteItemState(List<Store> favouriteItems, int itemCount) {
-    this.favouriteItems = favouriteItems;
-    this.itemCount = itemCount;
-  }
 
   @override
   Widget build(BuildContext context) {
     _markUnFavouriteItems(int index) {
-      if (favouriteItems[index].favourite) {
-        favouriteItems[index].favourite = false;
-        itemCount = itemCount - 1;
-        favouriteItems.removeAt(index);
+      if (widget.favouriteItems[index].favourite) {
+        widget.favouriteItems[index].favourite = false;
+        widget.itemCount = widget.itemCount - 1;
+        widget.favouriteItems.removeAt(index);
+        widget.onUnFavouritePressed(true);
       }
       setState(() {});
     }
@@ -57,7 +50,7 @@ class _FavouriteItemState extends State<FavouriteItems> {
               child: new GridView.builder(
                   gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
-                  itemCount: itemCount,
+                  itemCount: widget.itemCount,
                   itemBuilder: (BuildContext context, int index) {
                     return new GestureDetector(
                       onTap: () {},
@@ -73,7 +66,7 @@ class _FavouriteItemState extends State<FavouriteItems> {
                                       image: new DecorationImage(
                                           fit: BoxFit.fitWidth,
                                           image: new NetworkImage(
-                                              favouriteItems[index]
+                                              widget.favouriteItems[index]
                                                   .itemImage))),
                                 ),
                                 new Container(
@@ -86,14 +79,14 @@ class _FavouriteItemState extends State<FavouriteItems> {
                                           MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
                                         new Text(
-                                          "${favouriteItems[index].itemName.substring(0, 8)}...",
+                                          "${widget.favouriteItems[index].itemName.substring(0, 8)}...",
                                           style: new TextStyle(
                                               fontWeight: FontWeight.w700,
                                               fontSize: 16.0,
                                               color: Colors.white),
                                         ),
                                         new Text(
-                                          "₹${favouriteItems[index].itemPrice}",
+                                          "₹${widget.favouriteItems[index].itemPrice}",
                                           style: new TextStyle(
                                               color: Colors.white70,
                                               fontWeight: FontWeight.w700),
@@ -123,7 +116,7 @@ class _FavouriteItemState extends State<FavouriteItems> {
                                       new Icon(Icons.stars,
                                           color: Colors.deepOrange, size: 20.0),
                                       new Text(
-                                        "${favouriteItems[index].itemRating}",
+                                        "${widget.favouriteItems[index].itemRating}",
                                         style:
                                             new TextStyle(color: Colors.white),
                                       ),
@@ -133,7 +126,7 @@ class _FavouriteItemState extends State<FavouriteItems> {
                                 new IconButton(
                                     icon: new Icon(
                                       _setFavouriteIcon(
-                                          favouriteItems[index].favourite),
+                                          widget.favouriteItems[index].favourite),
                                       color: Colors.deepOrange,
                                     ),
                                     onPressed: () {
