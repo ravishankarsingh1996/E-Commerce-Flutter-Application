@@ -7,6 +7,7 @@ class Store {
   Store.items({this.itemName, this.itemPrice, this.itemImage, this.itemRating});
 }
 
+
 List<Store> storeItems = [
   Store.items(
       itemName: "Kids Clothing",
