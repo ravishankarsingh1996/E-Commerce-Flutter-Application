@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'appTools/appTools.dart';
 import 'data/Store.dart';
+import 'favouriteItems.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -19,6 +20,21 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     this.context = context;
+
+    void setFavourite(int index) {
+      if (storeItems[index].favourite == false)
+        storeItems[index].favourite = true;
+      else
+        storeItems[index].favourite = false;
+      setState(() {});
+    }
+
+    IconData _setFavouriteIcon(bool state) {
+      if (state) {
+        return Icons.favorite;
+      } else
+        return Icons.favorite_border;
+    }
 
     Widget drawer = new Drawer(
       child: new Column(
@@ -100,8 +116,35 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             title: new Text("My Account"),
-            onTap: (){
+            onTap: () {
               showSnackBar("Open My Account", scaffoldKey);
+            },
+          ),
+          new Divider(),
+          new ListTile(
+            trailing: new CircleAvatar(
+              child: new Icon(
+                Icons.help,
+                color: Colors.white,
+                size: 20.0,
+              ),
+            ),
+            title: new Text("About Us"),
+            onTap: () {
+              showSnackBar("Open About Us", scaffoldKey);
+            },
+          ),
+          new ListTile(
+            trailing: new CircleAvatar(
+              child: new Icon(
+                Icons.exit_to_app,
+                color: Colors.white,
+                size: 20.0,
+              ),
+            ),
+            title: new Text("Logout"),
+            onTap: () {
+              showSnackBar("Logout User.", scaffoldKey);
             },
           )
         ],
@@ -161,38 +204,64 @@ class _MyHomePageState extends State<MyHomePage> {
                                 )
                               ],
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            Column(
                               children: <Widget>[
-                                new Container(
-                                  height: 30.0,
-                                  width: 60.0,
-                                  decoration: new BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: new BorderRadius.only(
-                                          topRight: new Radius.circular(5.0),
-                                          bottomRight:
-                                              new Radius.circular(5.0))),
-                                  child: new Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      new Icon(Icons.stars,
-                                          color: Colors.deepOrange, size: 20.0),
-                                      new Text(
-                                        "${storeItems[index].itemRating}",
-                                        style:
-                                            new TextStyle(color: Colors.white),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    new Container(
+                                      height: 30.0,
+                                      width: 60.0,
+                                      decoration: new BoxDecoration(
+                                          color: Colors.black,
+                                          borderRadius: new BorderRadius.only(
+                                              topRight:
+                                                  new Radius.circular(5.0),
+                                              bottomRight:
+                                                  new Radius.circular(5.0))),
+                                      child: new Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                          new Icon(Icons.stars,
+                                              color: Colors.deepOrange,
+                                              size: 20.0),
+                                          new Text(
+                                            "${storeItems[index].itemRating}",
+                                            style: new TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                ),
-                                new IconButton(
-                                    icon: new Icon(
-                                      Icons.favorite_border,
-                                      color: Colors.deepOrange,
                                     ),
-                                    onPressed: () {})
+                                    new IconButton(
+                                        icon: new Icon(
+                                          _setFavouriteIcon(
+                                              storeItems[index].favourite),
+                                          color: Colors.deepOrange,
+                                        ),
+                                        onPressed: () {
+                                          setFavourite(index);
+                                        })
+                                  ],
+                                ),
+                                Container(
+                                  padding: EdgeInsets.all(5.0),
+                                  alignment: Alignment(1.0, 0.0),
+                                  child:new InkWell(
+                                    child: new CircleAvatar(
+                                      backgroundColor: Colors.black26,
+                                      child:  new IconButton(
+                                          icon: new Icon(
+                                            Icons.add_shopping_cart,
+                                            color: Colors.deepOrange,
+                                            size: 20.0,
+                                          ),
+                                          onPressed: () {}),
+                                    ),
+                                  ),
+                                )
                               ],
                             )
                           ],
@@ -219,7 +288,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Colors.white,
               ),
               onPressed: () {
-                showSnackBar("Opne Favourite", scaffoldKey);
+//                showSnackBar("Opne Favourite", scaffoldKey);
+                Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (context) => new FavouriteItems(storeItems)));
               }),
           new Stack(
             alignment: Alignment.topLeft,
