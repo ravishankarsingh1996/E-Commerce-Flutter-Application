@@ -16,20 +16,19 @@ class _MyHomePageState extends State<MyHomePage> {
   String acctEmail = "ravishankarsingh1996@gmail.com";
   String acctPic =
       "https://avatars3.githubusercontent.com/u/20386271?s=460&v=4";
-  int noOfFav= 0;
+  int noOfFav = 0;
 
   @override
   Widget build(BuildContext context) {
     this.context = context;
 
     void setFavourite(int index) {
-      if (storeItems[index].favourite == false){
+      if (storeItems[index].favourite == false) {
         storeItems[index].favourite = true;
-        noOfFav = noOfFav +1;
-      }
-      else{
+        noOfFav = noOfFav + 1;
+      } else {
         storeItems[index].favourite = false;
-        noOfFav = noOfFav -1;
+        noOfFav = noOfFav - 1;
       }
       setState(() {});
     }
@@ -298,11 +297,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: () {
 //                showSnackBar("Opne Favourite", scaffoldKey);
                     Navigator.of(context).push(new MaterialPageRoute(
-                        builder: (context) => FavouriteItems(storeItems: storeItems, onUnFavouritePressed: (bool state){
-                          noOfFav = noOfFav -1;
-                          setState(() {
-                          });
-                        }, )));
+                        builder: (context) => FavouriteItems(
+                              storeItems: storeItems,
+                              onUnFavouritePressed: (bool state) {
+                                noOfFav = noOfFav - 1;
+                                setState(() {});
+                              },
+                            )));
                   }),
               new CircleAvatar(
                 radius: 8.0,

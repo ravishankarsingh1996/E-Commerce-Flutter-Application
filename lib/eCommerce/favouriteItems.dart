@@ -8,7 +8,7 @@ class FavouriteItems extends StatefulWidget {
   int itemCount = 0;
   Function(bool state) onUnFavouritePressed;
 
-  FavouriteItems({this.storeItems, this.onUnFavouritePressed}){
+  FavouriteItems({this.storeItems, this.onUnFavouritePressed}) {
     favouriteItems = new List();
     for (int i = 0; i < storeItems.length; i++) {
       if (storeItems[i].favourite) {
@@ -23,7 +23,6 @@ class FavouriteItems extends StatefulWidget {
 }
 
 class _FavouriteItemState extends State<FavouriteItems> {
-
   @override
   Widget build(BuildContext context) {
     _markUnFavouriteItems(int index) {
@@ -65,9 +64,9 @@ class _FavouriteItemState extends State<FavouriteItems> {
                                   decoration: new BoxDecoration(
                                       image: new DecorationImage(
                                           fit: BoxFit.fitWidth,
-                                          image: new NetworkImage(
-                                              widget.favouriteItems[index]
-                                                  .itemImage))),
+                                          image: new NetworkImage(widget
+                                              .favouriteItems[index]
+                                              .itemImage))),
                                 ),
                                 new Container(
                                   height: 35.0,
@@ -125,8 +124,8 @@ class _FavouriteItemState extends State<FavouriteItems> {
                                 ),
                                 new IconButton(
                                     icon: new Icon(
-                                      _setFavouriteIcon(
-                                          widget.favouriteItems[index].favourite),
+                                      _setFavouriteIcon(widget
+                                          .favouriteItems[index].favourite),
                                       color: Colors.deepOrange,
                                     ),
                                     onPressed: () {
