@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Fri Dec 14 17:41:49 IST 2018
+#Tue Dec 18 17:08:54 IST 2018
 4.path=lib/arm64-v8a/libflutter.so
 8.set=ASSET
 6.path=flutter_assets/AssetManifest.json

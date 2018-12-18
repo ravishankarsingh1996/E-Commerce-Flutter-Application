@@ -20,6 +20,10 @@
         "source": "/home/hp/Documents/ravi/E-Commerce-Flutter-Application-master/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
     },
     {
+        "merged": "/home/hp/Documents/ravi/E-Commerce-Flutter-Application-master/build/app/intermediates/res/merged/debug/drawable_ic_launcher.png.flat",
+        "source": "/home/hp/Documents/ravi/E-Commerce-Flutter-Application-master/android/app/src/main/res/drawable/ic_launcher.png"
+    },
+    {
         "merged": "/home/hp/Documents/ravi/E-Commerce-Flutter-Application-master/build/app/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher.png.flat",
         "source": "/home/hp/Documents/ravi/E-Commerce-Flutter-Application-master/android/app/src/main/res/mipmap-hdpi/ic_launcher.png"
     }
