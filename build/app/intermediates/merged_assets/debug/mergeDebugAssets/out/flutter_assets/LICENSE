@@ -3071,6 +3071,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 --------------------------------------------------------------------------------
 charcode
+http
+http_parser
 matcher
 path
 source_span

@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'model/FashioItemResponse.dart';
 
 import 'data/Store.dart';
 
 class FavouriteItems extends StatefulWidget {
-  List<Store> storeItems, favouriteItems;
+  List<FashionItemModel> storeItems, favouriteItems;
   int itemCount = 0;
   Function(bool state) onUnFavouritePressed;
 
