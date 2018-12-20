@@ -25,9 +25,6 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Color> colorList = [
     Colors.red, Colors.blue, Colors.orange, Colors.green, Colors.yellowAccent];
 
-  Widget _body;
-
-
   @override
   void initState() {
     fetchData();
@@ -42,9 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
       var parseJson = json.decode(result.body);
       var data = parseJson["data"];
       final List parsedList = json.decode(json.encode(
-          data)); //assuming this json returns an array of signupresponse objects
-      itemList =
-          parsedList.map((val) => FashionItemModel.fromJson(val)).toList();
+          data)); //assuming this json returns an array of StoreListresponse objects
+      itemList = parsedList.map((val) => FashionItemModel.fromJson(val)).toList();
       for (int i = 0; i < itemList.length; i++) {
         print(itemList[i].itemName);
       }
@@ -195,14 +191,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
     Widget getBodyUI() {
       if (itemList.length == 0) {
-        return _body = new Center(
+        return new Center(
           child: ColorLoader(
            radius: 20.0,
             dotRadius: 10.0,
           ),
         );
       } else {
-        return _body = new Center(
+        return new Center(
           child: Column(
             children: <Widget>[
               new Flexible(
